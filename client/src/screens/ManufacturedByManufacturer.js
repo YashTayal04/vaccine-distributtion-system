@@ -1,11 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "../css/Distributorscreen.css";
-
-import Button from "@material-ui/core/Button";
-
-import { Link } from "react-router-dom";
-
 const date = new Date();
 const d = date.getFullYear();
 
@@ -22,17 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function ShipProductByDistributor(props) {
-  // console.log(props.data[0]);
-
-  const accounts = props.accounts;
-  const supplyChainContract = props.supplyChainContract;
-
-  const handleShipButton = async (id) => {
-    await supplyChainContract.methods
-      .shipByDistributor(id)
-      .send({ from: accounts[0], gas: 10000000 });
-  };
+export function ManufacturedByManufacturer(props) {
+  console.log(props.data[0]);
 
   return (
     <div className="Distributor">
@@ -44,7 +30,6 @@ export function ShipProductByDistributor(props) {
           <th>Product Category </th>
           <th>Owner</th>
           <th>State</th>
-          <th>Ship</th>
         </tr>
         {/* adding data using loop */}
         {props.data.map((s) => {
@@ -56,21 +41,6 @@ export function ShipProductByDistributor(props) {
               <td>{s[4]}</td>
               <td>{s[0]}</td>
               <td>{s[5]}</td>
-              {/* <td>
-								<Ship />
-							</td> */}
-              <td>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => {
-                    handleShipButton(s[1]);
-                  }}
-                >
-                  Ship
-                </Button>
-                {/* <Buy onClick={() => handleBuyButton(s[0])} /> */}
-              </td>
             </tr>
           );
         })}

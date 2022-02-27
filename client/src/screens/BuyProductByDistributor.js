@@ -22,16 +22,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function ShipProductByDistributor(props) {
-  // console.log(props.data[0]);
+export function BuyProductByDistributor(props) {
+  //   console.log(props.data[0]);
 
+  // var [tableData, setTableData] = React.useState([]);
   const accounts = props.accounts;
   const supplyChainContract = props.supplyChainContract;
 
-  const handleShipButton = async (id) => {
+  const handleBuyButton = async (id) => {
     await supplyChainContract.methods
-      .shipByDistributor(id)
+      .purchaseByDistributor(id)
       .send({ from: accounts[0], gas: 10000000 });
+
+    // setCount(0);
   };
 
   return (
@@ -44,7 +47,7 @@ export function ShipProductByDistributor(props) {
           <th>Product Category </th>
           <th>Owner</th>
           <th>State</th>
-          <th>Ship</th>
+          <th>Buy</th>
         </tr>
         {/* adding data using loop */}
         {props.data.map((s) => {
@@ -56,18 +59,13 @@ export function ShipProductByDistributor(props) {
               <td>{s[4]}</td>
               <td>{s[0]}</td>
               <td>{s[5]}</td>
-              {/* <td>
-								<Ship />
-							</td> */}
               <td>
                 <Button
                   variant="contained"
                   color="secondary"
-                  onClick={() => {
-                    handleShipButton(s[1]);
-                  }}
+                  onClick={() => handleBuyButton(s[1])}
                 >
-                  Ship
+                  Buy
                 </Button>
                 {/* <Buy onClick={() => handleBuyButton(s[0])} /> */}
               </td>
